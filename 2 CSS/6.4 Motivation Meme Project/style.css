@@ -1,0 +1,27 @@
+html{
+    background-color: black;
+}
+
+/* h1{
+    color: white;
+    text-transform: capitalize;
+    font-family: 'Roboto', sans-serif;
+}
+h2{
+    color: white;
+    
+} */
+
+.poster{
+    text-align: center;
+    color: white;
+    width: 50%;
+    margin-left: 25%;
+    margin-top: 100px;
+}
+
+.motivational-i{
+    align-items: center;
+    border: 5px solid white;
+    width: 100%;
+}
