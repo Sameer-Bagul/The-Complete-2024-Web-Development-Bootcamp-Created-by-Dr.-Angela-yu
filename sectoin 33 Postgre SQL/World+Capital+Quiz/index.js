@@ -1,14 +1,33 @@
 import express from "express";
 import bodyParser from "body-parser";
+import pg from "pg";
 
 const app = express();
 const port = 3000;
 
-let quiz = [
-  { country: "France", capital: "Paris" },
-  { country: "United Kingdom", capital: "London" },
-  { country: "United States of America", capital: "New York" },
-];
+
+// we are making a connection beetween the database and our app
+const db = new pg.Client({
+  user:"postgres",
+  host:"localhost",
+  database:"world",
+  password:"Sameer123",
+  port:"5432"
+});
+
+db.connect();
+
+// this is how we are loading the content from the data base in the quiz object
+let quiz = []; 
+// Querying the Database and Handling Data
+db.query("SELECT * FROM capitals", (err, res) => {
+  if (err) {
+    console.error("Error executing query", err.stack);
+  } else {
+    quiz = res.rows;
+  }
+  db.end();
+});
 
 let totalCorrect = 0;
 
@@ -46,7 +65,6 @@ app.post("/submit", (req, res) => {
 
 async function nextQuestion() {
   const randomCountry = quiz[Math.floor(Math.random() * quiz.length)];
-
   currentQuestion = randomCountry;
 }
 
