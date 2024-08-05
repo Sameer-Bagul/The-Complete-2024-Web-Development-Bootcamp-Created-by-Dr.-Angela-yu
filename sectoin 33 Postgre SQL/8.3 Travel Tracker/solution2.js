@@ -9,7 +9,7 @@ const db = new pg.Client({
   user: "postgres",
   host: "localhost",
   database: "world",
-  password: "123456",
+  password: "Sameer123",
   port: 5432,
 });
 db.connect();
@@ -25,7 +25,7 @@ async function checkVisisted() {
     countries.push(country.country_code);
   });
   return countries;
-}
+} 
 
 // GET home page
 app.get("/", async (req, res) => {
@@ -46,9 +46,10 @@ app.post("/add", async (req, res) => {
     const data = result.rows[0];
     const countryCode = data.country_code;
 
-    await db.query("INSERT INTO visited_countries (country_code) VALUES ($1)", [
-      countryCode,
-    ]);
+    await db.query(
+      "INSERT INTO visited_countries (country_code) VALUES ($1)", 
+      [countryCode,]
+    );
     res.redirect("/");
   }
 });
