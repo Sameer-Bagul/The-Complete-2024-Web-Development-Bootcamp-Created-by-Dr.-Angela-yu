@@ -9,7 +9,7 @@ const db = new pg.Client({
   user: "postgres",
   host: "localhost",
   database: "secrets",
-  password: "123456",
+  password: "Sameer123",
   port: 5432,
 });
 db.connect();
@@ -40,7 +40,9 @@ app.post("/register", async (req, res) => {
 
     if (checkResult.rows.length > 0) {
       res.send("Email already exists. Try logging in.");
-    } else {
+    } 
+    
+    else { /// the user not alleredy exist  
       const result = await db.query(
         "INSERT INTO users (email, password) VALUES ($1, $2)",
         [email, password]
